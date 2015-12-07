@@ -1,7 +1,7 @@
 {
     "name": "taetesting/awss3plus",
     "description": "This is lib to use AWS S3 easier",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "keywords": ["taetesting", "amazon web service", "aws s3"],
     "authors": [
         {
