@@ -22,14 +22,14 @@ class S3Plus
                         ]);
     }
 
-    public function uploadOneFile($filePath, $bucket)
+    public function uploadOneFile($bucket, $filePath)
     {
         if (!file_exists ($filePath)) {
             return "FILE NOT FOUND";
         }
         $date_utc = new \DateTime(null, new \DateTimeZone("UTC"));
         $time     = $date_utc->format('Ymd-His');
-        $key = $time . basename($filePath);
+        $key = $time . '-' . basename($filePath);
         try {
             $result = $this->s3Client->putObject(array(
                                         'Bucket'       => $bucket,
@@ -37,10 +37,10 @@ class S3Plus
                                         'ContentType'  => 'text/plain',
                                         'Key'          => $key,
                                         'StorageClass' => 'REDUCED_REDUNDANCY',
-                                        'ACL'          => ACL_PUBLIC_READ
+                                        'ACL'          => self::ACL_PUBLIC_READ
                                     ));
             // We can poll the object until it is accessible
-            $client->waitUntil('ObjectExists', array(
+            $this->s3Client->waitUntil('ObjectExists', array(
                 'Bucket' => $bucket,
                 'Key'    => $key
             ));
