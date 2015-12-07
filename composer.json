@@ -1,8 +1,7 @@
 {
     "name": "taetesting/awss3plus",
     "description": "This is lib to use AWS S3 easier",
-    "license": "",
-    "type": "library",
+    "version": "0.1.0",
     "keywords": ["taetesting", "amazon web service", "aws s3"],
     "authors": [
         {
@@ -10,14 +9,13 @@
             "email": "tae.testing@gmail.com"
         }
     ],
-    "require": {
-        "php": ">=5.3.3",
-        "aws/aws-sdk-php": "^3.11"
-        },
     "autoload": {
         "psr-0": {
             "AWSS3Plus": "src/"
         }
     },
-    "version": "0.1.0"
+    "require": {
+        "php": ">=5.3.3",
+        "aws/aws-sdk-php": "^3.11"
+    }
 }
