@@ -3,6 +3,7 @@ namespace AWSS3Plus;
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
+use Guzzle\Service\Resource\Model;
 
 class S3Plus
 {
@@ -54,8 +55,34 @@ class S3Plus
         }
     }
 
+    /**
+     * object format
+     * array(6) { 
+     *  ["Key"]=> string
+     *  ["LastModified"]=> object(Aws\Api\DateTimeResult)#128 (3) { 
+     *                                      ["date"]=> string(26) "2015-12-04 10:39:06.000000" 
+     *                                      ["timezone_type"]=> int(2) 
+     *                                      ["timezone"]=> string(1) "Z" } 
+     *  ["ETag"]=> string(34) ""d41d8cd98f00b204e9800998ecf8427e"" 
+     *  ["Size"]=> int 
+     *  ["StorageClass"]=> string(8) "STANDARD"
+     *  ["Owner"]=> array(2) { 
+     *              ["DisplayName"]=> string(11) "andrew.duck" 
+     *              ["ID"]=> string(64) "60e436f8955b82fbc8fb5b4b4f41712975b04e500f0664d7477d1a0e1ed4a663" } 
+     * } 
+     */
     public function getListFromBucket($bucket)
     {
-        
+        $objects = $this->s3Client->getIterator('ListObjects', array('Bucket' => $bucket));
+        return $objects;
+    }
+
+    public function getObject($bucket, $keyName)
+    {
+        $object = $this->s3Client->getObject(array(
+                                    'Bucket' => $bucket,
+                                    'Key'    => $keyName
+                                ));
+        return $object;
     }
 }
