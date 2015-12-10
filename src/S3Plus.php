@@ -85,4 +85,9 @@ class S3Plus
                                 ));
         return $object;
     }
+
+    public function getObjectUrl($bucket, $keyName)
+    {
+        return $this->s3Client->getObjectUrl($bucket, $keyName);
+    }
 }
